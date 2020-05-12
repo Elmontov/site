@@ -13,7 +13,7 @@ from data.profile_edit_form import ProfileEditForm
 from data.photoform import PhotoForm
 import os
 from werkzeug.utils import secure_filename
-
+#fcmt
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 

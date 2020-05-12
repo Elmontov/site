@@ -1,0 +1,36 @@
+{% extends "store_base.html" %}
+
+{% block content %}
+<h1>{{ user.name }} {{ user.surname }}</h1>
+<p>Phone number: {{ user.phone_number}}</p>
+<p>Email: {{ user.email}}</p>
+<p>Adress: {{ user.adress}}</p>
+<p>Birth day: {{ user.bd}}</p>
+<p>Registered since: {{ user.reg_date}}</p>
+<p>About:</p>
+{% if user.description%}
+<h3>{{user.description}}</h3>
+{%else%}
+Not written
+{%endif%}
+
+{% if current_user.id == user.id%}
+<p> <a href='/edit-profile/{{current_user.id}}' type="button" class="btn btn-warning">Edit data</a> <a href='/newoffer' type="button" class="btn btn-success">New offer</a> </p>
+{%endif%}
+<p> Offers: </p>
+{% if offers%}
+    {% for offer in offers %}
+    <p>
+        <table class="table table-bordered">
+        <tr>
+            <td><a href="/view-offer/{{offer.id}}">{{offer.offer}}</a></td>
+            <td>{{offer.location}}</td>
+            <td>{{offer.contact_number}}</td>
+        </tr>
+        </table>
+    </p>
+    {% endfor %}
+{%else%}
+No offers yet
+{%endif%}
+{% endblock %}

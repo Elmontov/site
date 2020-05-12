@@ -1,0 +1,40 @@
+{% extends "store_base.html" %}
+
+{% block content %}
+
+<form method="post">
+    {{ form.hidden_tag() }}
+    {{ form.csrf_token }}
+    <p>
+        {{ form.search.label }}<br>
+        {{ form.search(class="form-control") }}<br>
+        {% for error in form.search.errors %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
+    </p>
+    {% endfor %}
+    </p>
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+</form>
+
+<div class="container" align="center">
+  <div class="row">
+    {% for e in offers %}
+      <div class="panel panel-primary">
+        <div class="panel-body"><a href="/view-offer/{{e.id}}"><img src="/static/images/{{e.id}}/thumbnail.jpg" alt="User did not upload thumbnail" class="img-responsive" style="width:500px; height:500px;"></a></div>
+        <div class="panel-footer">{{e.offer}}</div>
+      </div>
+    {% endfor %}
+  </div>
+</div><br>
+</div><br><br>
+
+<p align="center"> Page {{pg}} out of <a href="/home/{{maxpage}}/{{search}}">{{maxpage}}</a></p>
+{% if pg != 0 and pg != maxpage%}
+<p align="center"> <button type="button" class="btn" href="/home/{{prpg}}"><-(prev) </button> <button href="/home/{{nxpg}}/{{search}}" type="button" class="btn"> (next)-> </button> </p>
+{% elif pg == 0%}
+<p align="center"><button href="/home/{{nxpg}}/{{search}}" type="button" class="btn"> (next)-> </button> </p>
+{% elif pg == maxpage%}
+<p align="center"> <button type="button" class="btn" href="/home/{{prpg}}"><-(prev) </button> </p>
+{% endif %}
+{% endblock %}

@@ -113,9 +113,9 @@ def main():
             session.commit()
             f = ofform.thumbnail.data
             if f:
-                if not os.path.exists(f'db\\images\\{offer.id}'):
-                    os.mkdir(f'db\\images\\{offer.id}')
-                f.save(f'db\\images\\{offer.id}\\thumbnail.jpg')
+                if not os.path.exists(f'static\\images\\{offer.id}'):
+                    os.mkdir(f'static\\images\\{offer.id}')
+                f.save(f'static\\images\\{offer.id}\\thumbnail.jpg')
             return redirect('/')
         return render_template('newoffer.html', title='New offer', form=ofform)
 
